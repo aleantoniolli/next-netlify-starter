@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <div style={{ maxHeight: '100vh' }}>
       {page === 0 ?
-        <main style={{ alignContent: 'center', height: '60vh' }}>
+        <main style={{ alignContent: 'center', height: '100vh' }}>
           <Header title="Bom diaaa baby!!" />
           <p style={{ maxWidth: '80vw', textAlign: "justify" }} >
             Pra ser um pouco mais privado, esse momento do carinho está bloqueado com uma senha. 🔑🔐<br></br><br></br>
