@@ -13,7 +13,7 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false)
   const [input, setInput] = useState('')
   const [page, setPage] = useState(0)
-
+  const [time, setTime] = useState(0)
   useEffect(() => {
     page === 5 &&
       setTimeout(() => {
@@ -30,13 +30,18 @@ export default function Home() {
 
   const buttonClick = () => {
     if (input == 'liberdade') {
-      alert('permissão concedida')
+      alert('Boa! Permissão concedida! 🔓')
       setPage(1)
     } else if (input == 'amor') {
-      alert('Não era bem essa, mas amor também é muito importante, ta liberado!')
+      alert('Não era bem essa, mas amor também é muito importante, ta liberado! 🔓')
       setPage(1)
     } else {
-      alert('ops, tenta de novo')
+      time !== 2 && setTime(time + 1)
+      if (time === 2) {
+        alert(`Não foi dessa vez amor, mas vou te liberar igual! 🔓`)
+        setPage(1)
+      }
+      else { alert(`Ops! Não é essa, tenta mais uma vez!\nTem mais ${2 - time} tentativas`) }
     }
   }
   const defaultOptions = {
@@ -69,8 +74,8 @@ export default function Home() {
             Pra ser um pouco mais privado, esse momento do carinho está bloqueado com uma senha. 🔑🔐<br></br><br></br>
             A senha é uma palavra, que na minha percepção é a única coisa que o ser humano precisa ter nesse universo.
           </p>
-          <input style={{ marginBottom: 20 }} value={input} onChange={(data) => setInput(data.target.value.toLocaleLowerCase().replace(/\s/g, ''))} ></input>
-          <button onClick={buttonClick}>Entrar</button>
+          <input value={input} onChange={(data) => setInput(data.target.value.toLocaleLowerCase().replace(/\s/g, ''))} ></input>
+          <button style={{ marginTop: 20 }} onClick={buttonClick}>Entrar</button>
 
           {/* <button style={buttonStyle} onClick={() => setIsStopped(true)}>stop</button>
           <button style={buttonStyle} onClick={() => setIsStopped(false)}>play</button>
@@ -83,7 +88,7 @@ export default function Home() {
             <>
               <p style={{ maxWidth: '80vw', textAlign: "justify" }} >
                 Há três anos atrás eu resolvi te pedir em namoro de uma forma diferente, que realmente demonstrasse
-                o tipo de pessoa que eu era. Afinal, eu tava te pedindo em namoro, tu precisava entender como eu era pra conseguir
+                o tipo de pessoa que eu era. Afinal, eu estava te pedindo em namoro, tu precisava entender como eu era pra conseguir
                 tomar tua decisão.
               </p>
               <p style={{ maxWidth: '80vw', textAlign: "justify" }} >
@@ -94,10 +99,10 @@ export default function Home() {
           {page === 2 &&
             <>
               <p style={{ maxWidth: '80vw', textAlign: "justify" }} >
-                {input == 'liberdade' ? input == 'amor' ? 'Talvez tu esteja se perguntando, qual era essa bendita senha que não é amor?' : 'Talvez tu esteja se perguntando, mas por que liberdade?' : 'Talvez tu esteja se perguntando, qual era essa bendita senha?'}
+                {input == 'liberdade' ? 'Talvez tu esteja se perguntando, mas por que liberdade?' : input == 'amor' ? 'Talvez tu esteja se perguntando, qual era essa bendita senha que não é amor?' : 'Talvez tu esteja se perguntando, qual era essa bendita senha?'}
               </p>
               <p style={{ maxWidth: '80vw', textAlign: "justify" }} >
-                <strong>Liberdade:</strong> Liberdade não é fazer o que quiser no momento que quiser, pra mim isso é irresbonsablidade.
+                <strong>Liberdade:</strong> Liberdade não é fazer o que quiser no momento que quiser, pra mim isso é irresponsabilidade.
                 Liberdade no sentido literal significa o direito de agir segundo o seu livre arbítrio,
                 de acordo com a própria
                 vontade, desde que não prejudique outra pessoa, é a sensação de estar livre e não depender de ninguém.
