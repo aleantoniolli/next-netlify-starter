@@ -1,18 +1,20 @@
 import Head from 'next/head'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
-import Lottie from 'react-lottie'
+import Lottie from 'react-lottie-segments'
 import worldAnimation from './world.json'
 import coracaoAnimation from './lovestruck-heart.json'
 import yoga from './62773-yoga-developer.json'
 import loveAnime from './heart-animation.json'
+import yinAnime from './ying.json'
 import explosionAnimation from './lf30_editor_lexpv6gw.json'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function Home() {
   const [input, setInput] = useState('')
   const [page, setPage] = useState(0)
   const [time, setTime] = useState(0)
+
   useEffect(() => {
     page === 5 &&
       setTimeout(() => {
@@ -41,6 +43,10 @@ export default function Home() {
       else { alert(`Ops! Não é essa, tenta mais uma vez!\nTem mais ${2 - time} tentativas`) }
     }
   }
+  const handleFinalPage = () => {
+    setPage(7)
+  }
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -65,6 +71,11 @@ export default function Home() {
     loop: true,
     autoplay: true,
     animationData: loveAnime,
+  };
+  const yinOption = {
+    autoplay: true,
+    loop: false,
+    animationData: yinAnime,
   };
 
   return (
@@ -166,7 +177,18 @@ export default function Home() {
               </>
             }
             {page === 7 &&
-              <>
+              <div style={{ alignItems: 'center', alignContent: 'center', justifyContent: 'center', width: '80%' }}>
+                <Lottie options={yinOption}
+                  height={'40vh'}
+                  width={'80vw'}
+                  loop={false}
+                  playSegments={{
+                    segments: [125, 165],
+                    forceFlag: true,
+                    speed: 0.5
+                  }}
+                  speed={0.5}
+                />
                 <strong>
                   <p style={{ maxWidth: '80vw', textAlign: "center", fontSize: '3rem' }} >
                     Feliz 3 anos!
@@ -177,8 +199,8 @@ export default function Home() {
                     <br></br>
                   </p>
                 </strong>
-                <button onClick={() => { window.open('https://api.whatsapp.com/send?phone=5554999622927&text=Oii%20meu%20amor!') }}>Chamar o meu amor lindo no WhatsApp 😂</button>
-              </>
+                <button style={{ width: '100%' }} onClick={() => { window.open('https://api.whatsapp.com/send?phone=5554999622927&text=Oii%20meu%20amor!') }}>Chamar o meu amor lindo no WhatsApp 😂</button>
+              </div>
             }
             {
               page === 6 &&
@@ -188,7 +210,7 @@ export default function Home() {
                 eventListeners={[
                   {
                     eventName: 'complete',
-                    callback: () => setPage(7),
+                    callback: handleFinalPage,
                   },
                 ]}
 
